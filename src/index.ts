@@ -7,6 +7,10 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+app.get('/', (req, res) => {
+  res.json({'message': 'ok'});
+})
+
 app.use('/api/v1/posts', router)
 
 db.then(() => {
