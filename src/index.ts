@@ -1,18 +1,20 @@
-import express from 'express'
-import { db } from './config/db.config'
-import { router } from './routes/post.routes'
+import express from "express";
+import { db } from "./config/db.config";
+import { router } from "./routes/post.routes";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.json({'message': 'ok'});
-})
+app.get("/", (req, res) => {
+  res.json({ message: "ok" });
+});
 
-app.use('/api/v1/posts', router)
+app.use("/api/v1/posts", router);
 
 db.then(() => {
-    app.listen(7070, () => console.log('Server is listening on port 7070'))
-})
+  app.listen(7070, () => console.log("Server is listening on port 7070"));
+});
+
+export default app;
