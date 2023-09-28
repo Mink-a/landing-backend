@@ -11,10 +11,12 @@ export class postService {
     }
   }
 
-  //get all posts
-  async getPosts() {
+  // Get all posts with pagination
+  async getPosts(page: number, perPage: number) {
     try {
-      const posts = await Post.find({});
+      const skip = (page - 1) * perPage;
+      const posts = await Post.find({}).skip(skip).limit(perPage).exec();
+
       return posts;
     } catch (error) {
       console.log(error);

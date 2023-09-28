@@ -27,9 +27,14 @@ class postController {
     }
   };
 
-  //get all posts
+  //get all posts with pagination
   getPosts = async (req: Request, res: Response) => {
-    const posts = await postServices.getPosts();
+    const page = req.query.page ? parseInt(req.query.page as string) : 1; // Use a default value of 1 if 'page' is not provided
+    const perPage = req.query.perPage
+      ? parseInt(req.query.perPage as string)
+      : 10; // Use a default value of 10 if 'perPage' is not provided
+
+    const posts = await postServices.getPosts(page, perPage);
     res.send(posts);
   };
 
